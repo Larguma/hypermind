@@ -33,6 +33,7 @@ console.log(
 let mySeq = 0;
 
 const seenPeers = new Map();
+const MAX_PEERS = 10000;
 
 const sseClients = new Set();
 
@@ -115,14 +116,20 @@ function handleMessage(msg, sourceSocket) {
       .digest("hex");
     if (!powHash.startsWith(POW_PREFIX)) return; // Invalid PoW
 
-    // 2. Verify Signature
+    // 2. Check Sequence (Optimization: Drop duplicates before expensive verify)
+    const stored = seenPeers.get(id);
+    if (stored && seq <= stored.seq) return; // Ignore old/duplicate messages
+
+    // 3. Verify Signature
     if (!sig) return;
     try {
       let key;
-      const storedPeer = seenPeers.get(id);
-      if (storedPeer && storedPeer.key) {
-        key = storedPeer.key;
+      if (stored && stored.key) {
+        key = stored.key;
       } else {
+        // Enforce MAX_PEERS for new peers
+        if (!stored && seenPeers.size >= MAX_PEERS) return;
+
         key = crypto.createPublicKey({
           key: Buffer.from(id, "hex"),
           format: "der",
@@ -138,36 +145,20 @@ function handleMessage(msg, sourceSocket) {
       );
       if (!verified) return; // Invalid Signature
 
-      // Store key for future use if not already stored
-      if (!storedPeer || !storedPeer.key) {
-        // We'll attach it when we update seenPeers below
-      }
-
+      // Update Peer
       if (hops === 0) {
         sourceSocket.peerId = id;
       }
 
       const now = Date.now();
-      const stored = seenPeers.get(id);
+      const wasNew = !stored;
+      
+      seenPeers.set(id, { seq, lastSeen: now, key });
 
-      let shouldUpdate = false;
+      if (wasNew) broadcastUpdate();
 
-      if (!stored) {
-        // New peer
-        shouldUpdate = true;
-      } else if (seq > stored.seq) {
-        shouldUpdate = true;
-      }
-
-      if (shouldUpdate) {
-        const wasNew = !stored;
-        seenPeers.set(id, { seq, lastSeen: now, key });
-
-        if (wasNew) broadcastUpdate();
-
-        if (hops < 3) {
-          relayMessage({ ...msg, hops: hops + 1 }, sourceSocket);
-        }
+      if (hops < 3) {
+        relayMessage({ ...msg, hops: hops + 1 }, sourceSocket);
       }
     } catch (e) {
       return;
