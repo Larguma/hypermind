@@ -1,0 +1,9 @@
+services:
+  hypermind:
+    build: .
+    image: hypermind
+    container_name: hypermind
+    network_mode: host
+    restart: unless-stopped
+    environment:
+      - PORT=3000

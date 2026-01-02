@@ -1,15 +1,10 @@
-FROM node:18-bookworm
+FROM node:20-slim
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y python3 make g++ && rm -rf /var/lib/apt/lists/*
-
-ENV npm_config_build_from_source=true
-ENV PYTHON=/usr/bin/python3
-
 COPY package*.json ./
 
-RUN npm ci --only=production
+RUN npm ci --omit=dev
 
 COPY server.js ./
 
