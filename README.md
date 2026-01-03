@@ -122,7 +122,7 @@ Add this to your `services.yaml`:
 | Variable | Default | Description |
 | --- | --- | --- |
 | `PORT` | `3000` | The port the web dashboard listens on. Since `--network host` is used, this port opens directly on the host. |
-| `MAX_PEERS` | `10000` | Maximum number of peers to track in the swarm. Unless you're expecting the entire internet to join, the default is probably fine. |
+| `MAX_PEERS` | `1000000` | Maximum number of peers to track in the swarm. Unless you're expecting the entire internet to join, the default is probably fine. |
 
 ## » Usage
 
