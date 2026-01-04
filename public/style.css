@@ -85,3 +85,59 @@ a { color: #4b5563; text-decoration: none; border-bottom: 1px dotted #4b5563; }
     color: #333;
     margin-top: 1rem;
 }
+
+.bandwidth-overlay {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background: transparent;
+}
+.bandwidth-graph-container {
+    padding: 0.5rem 0 0;
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    max-height: 150px;
+    opacity: 1;
+    overflow: hidden;
+}
+.bandwidth-overlay.collapsed .bandwidth-graph-container { max-height: 0; opacity: 0; padding: 0; }
+.bandwidth-overlay .close-btn {
+    position: static;
+    font-size: 0.65rem;
+    font-weight: bold;
+    padding: 0.2rem 0.5rem;
+    color: #9ca3af;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+    outline: none;
+}
+.bandwidth-overlay .close-btn:hover { color: #cbd5e1; border-color: #4b5563; }
+#bandwidthGraph { width: 100%; height: 100px; display: block; background: transparent; }
+.bandwidth-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1.5rem 0.75rem;
+}
+.bandwidth-legend { display: flex; gap: 1.5rem; }
+.legend-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.7rem; }
+.legend-color { width: 10px; height: 10px; border-radius: 2px; }
+.time-pills { display: flex; gap: 0.3rem; }
+.bandwidth-overlay.collapsed .time-pill { display: none; }
+.time-pill {
+    background: transparent;
+    color: #4b5563;
+    border: 1px solid #333;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.65rem;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+    outline: none;
+}
+.time-pill:hover { color: #9ca3af; border-color: #4b5563; }
+.time-pill.active { background: #1a1a1a; color: #4ade80; border-color: #4ade80; }
