@@ -101,10 +101,10 @@ Tune the network parameters to fit your system resources. The defaults are safe 
 | `MAX_PEERS` | `50000` | Maximum number of peers to track in memory. |
 | `MAX_MESSAGE_SIZE` | `2048` | Maximum size of a single message in bytes. |
 | `MAX_RELAY_HOPS` | `2` | Maximum number of times a message is relayed. |
-| `MAX_CONNECTIONS` | `32` | Maximum number of active P2P connections. |
-| `HEARTBEAT_INTERVAL` | `5000` | How often (ms) to send heartbeat messages. |
-| `CONNECTION_ROTATION_INTERVAL` | `30000` | How often (ms) to rotate connections. |
-| `PEER_TIMEOUT` | `15000` | Time (ms) before a silent peer is considered offline. |
+| `MAX_CONNECTIONS` | `15` | Maximum number of active P2P connections. |
+| `HEARTBEAT_INTERVAL` | `30000` | How often (ms) to send heartbeat messages. |
+| `CONNECTION_ROTATION_INTERVAL` | `300000` | How often (ms) to rotate connections. |
+| `PEER_TIMEOUT` | `45000` | Time (ms) before a silent peer is considered offline. |
 | `CHAT_RATE_LIMIT` | `5000` | Time window (ms) for chat rate limiting. |
 | `VISUAL_LIMIT` | `500` | Max number of particles to render on the dashboard. |
 
@@ -152,7 +152,7 @@ See detailed [instructions](https://gethomepage.dev/configs/services/#icons).
 | Variable | Default | Description |
 | --- | --- | --- |
 | `PORT` | `3000` | The port the web dashboard listens on. Since `--network host` is used, this port opens directly on the host. |
-| `MAX_PEERS` | `1000000` | Maximum number of peers to track in the swarm. Unless you're expecting the entire internet to join, the default is probably fine. |
+| `MAX_PEERS` | `50000` | Maximum number of peers to track in the swarm. Unless you're expecting the entire internet to join, the default is probably fine. |
 | `ENABLE_CHAT` | `false` | Set to `true` to enable the ephemeral P2P chat terminal. |
 
 ## » Features
