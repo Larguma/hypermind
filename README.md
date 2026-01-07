@@ -164,11 +164,17 @@ It counts. That's the main thing.
 **New:** A completely decentralized, ephemeral chat system built directly on top of the swarm topology.
 
 * **Ephemeral:** No database. No history. If you refresh, it's gone.
-* **Restricted:** You can only talk to your ~32 direct connections.
+* **Restricted (Default):** You can only talk to your ~32 direct connections.
+* **Global Mode:** Use `/global on` to broadcast messages to the entire swarm (relayed via gossip).
 * **Chaotic:** Every 30 seconds, the network rotates your connections. You might be mid-sentence and—*poof*—your audience changes.
 * **Anonymous:** You are identified only by the last 4 characters of your node ID.
 
 To enable this feature, set `ENABLE_CHAT=true`.
+
+**Commands:**
+* `/global on` - Enable global chat mode.
+* `/global off` - Disable global chat mode (local only).
+* `/global <message>` - Send a single message to the global swarm without switching modes.
 
 ## » Usage
 
