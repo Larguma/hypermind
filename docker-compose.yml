@@ -10,6 +10,7 @@ services:
       # --- Add-ons ---
       # - ENABLE_CHAT=false        # Enable decentralized chat
       # - ENABLE_MAP=false         # Enable peer map visualization
+      # - ENABLE_THEMES=true       # Enable theme switcher button
 
       # --- Refinements ---
       # - MAX_PEERS=50000          # Max peers to track in memory
