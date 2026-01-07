@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="/js/lists.js"></script>
+    <script src="/js/screenname.js"></script>
 </head>
 <body>
     <canvas id="network" data-visual-limit="{{VISUAL_LIMIT}}"></canvas>
@@ -17,7 +19,7 @@
             powered by <a href="https://github.com/lklynet/hypermind" target="_blank">hypermind</a>
         </div>
         <div class="debug">
-            ID: {{ID}}<br>
+            ID: <span id="my-screenname">{{ID}}</span><br>
             Direct Connections: <span id="direct">{{DIRECT}}</span><br>
             <span class="debug-link" onclick="openDiagnostics()">diagnostics</span>
             <span id="map-container" class="{{MAP_CLASS}}"> | <span class="debug-link" id="map-link" onclick="openMap()">map</span></span>
@@ -35,6 +37,10 @@
         <div class="modal-content">
             <button class="close-btn" onclick="closeDiagnostics()">×</button>
             <div class="modal-title">Diagnostics</div>
+            <div class="stat-row">
+                <span class="stat-label">ID</span>
+                <span class="stat-value" id="diag-id" style="font-size: 0.8em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; direction: rtl; max-width: 300px; display: block;">{{FULL_ID}}</span>
+            </div>
             <div class="stat-row">
                 <span class="stat-label">Heartbeats Received</span>
                 <span class="stat-value" id="diag-heartbeats-rx">0</span>

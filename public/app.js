@@ -220,7 +220,8 @@ const updateMap = async (peers) => {
                     fillOpacity: 0.15
                 }).addTo(map);
                 
-                marker.bindPopup(`<b>Node</b> ${peer.id.slice(-8)}<br>${loc.city}, ${loc.country}`);
+                const peerName = window.generateScreenname ? window.generateScreenname(peer.id) : peer.id.slice(-8);
+                marker.bindPopup(`<b>${peerName}</b><br>${loc.city}, ${loc.country}`);
                 peerMarkers[peer.id] = marker;
             }
         }
@@ -319,7 +320,16 @@ const appendMessage = (msg) => {
     
     if (msg.type === 'CHAT') {
         const senderColor = getColorFromId(msg.sender);
-        const senderName = msg.sender === myId ? 'You' : msg.sender.slice(-4);
+        
+        let senderName = 'Unknown';
+        if (window.generateScreenname) {
+            senderName = window.generateScreenname(msg.sender);
+        } else {
+            senderName = msg.sender.slice(-8);
+        }
+        
+        if (msg.sender === myId) senderName = 'You';
+
         const scopeLabel = msg.scope === 'GLOBAL' ? '[GLOBAL] ' : '';
         
         const senderSpan = document.createElement('span');
@@ -430,7 +440,18 @@ evtSource.onmessage = (event) => {
         }
     }
 
-    if (data.id) myId = data.id;
+    if (data.id) {
+        myId = data.id;
+        const diagIdEl = document.getElementById('diag-id');
+        if (diagIdEl && diagIdEl.innerText === '{{FULL_ID}}') {
+             diagIdEl.innerText = data.id;
+        }
+    }
+
+    if (data.screenname) {
+        const screennameEl = document.getElementById('my-screenname');
+        if (screennameEl) screennameEl.innerText = data.screenname;
+    }
 
     if (data.peers) {
         lastPeerData = data.peers;
