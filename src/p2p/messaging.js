@@ -6,6 +6,7 @@ const {
 const crypto = require("crypto");
 const { MAX_RELAY_HOPS, ENABLE_CHAT, CHAT_RATE_LIMIT } = require("../config/constants");
 const { BloomFilterManager } = require("../state/bloom");
+const { generateScreenname } = require("../utils/name-generator");
 
 class MessageHandler {
   constructor(
@@ -93,7 +94,7 @@ class MessageHandler {
         if (ENABLE_CHAT && this.chatSystemFn && hops === 0) {
           this.chatSystemFn({
             type: "SYSTEM",
-            content: `Connection established with Node ...${id.slice(-8)}`,
+            content: `Connection established with Node [${generateScreenname(id)}]`,
             timestamp: Date.now(),
           });
         }
@@ -134,7 +135,7 @@ class MessageHandler {
       if (ENABLE_CHAT && this.chatSystemFn && hops === 0) {
         this.chatSystemFn({
           type: "SYSTEM",
-          content: `Node ...${id.slice(-8)} disconnected.`,
+          content: `Node [${generateScreenname(id)}] disconnected.`,
           timestamp: Date.now(),
         });
       }

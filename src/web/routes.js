@@ -10,8 +10,30 @@ const HTML_TEMPLATE = fs.readFileSync(
     "utf-8"
 );
 
+// Pre-load lists and generator logic
+const adjectives = fs.readFileSync(path.join(__dirname, "../utils/adjectives.json"), "utf-8");
+const nouns = fs.readFileSync(path.join(__dirname, "../utils/nouns.json"), "utf-8");
+const generatorLogic = fs.readFileSync(path.join(__dirname, "../utils/name-generator.js"), "utf-8");
+
 const setupRoutes = (app, identity, peerManager, swarm, sseManager, diagnostics) => {
     app.use(express.json());
+
+    // Serve lists
+    app.get("/js/lists.js", (req, res) => {
+        res.setHeader("Content-Type", "application/javascript");
+        res.send(`window.ADJECTIVES = ${adjectives}; window.NOUNS = ${nouns};`);
+    });
+
+    // Serve generator
+    app.get("/js/screenname.js", (req, res) => {
+        res.setHeader("Content-Type", "application/javascript");
+        // Adapt CommonJS module to Browser script
+        const browserLogic = generatorLogic
+            .replace('const adjectives = require("./adjectives.json");', 'const adjectives = window.ADJECTIVES;')
+            .replace('const nouns = require("./nouns.json");', 'const nouns = window.NOUNS;')
+            .replace('module.exports = { generateScreenname };', 'window.generateScreenname = generateScreenname;');
+        res.send(browserLogic);
+    });
 
     app.get("/", (req, res) => {
         const count = peerManager.size;
@@ -19,7 +41,8 @@ const setupRoutes = (app, identity, peerManager, swarm, sseManager, diagnostics)
 
         const html = HTML_TEMPLATE
             .replace(/\{\{COUNT\}\}/g, count)
-            .replace(/\{\{ID\}\}/g, "..." + identity.id.slice(-8))
+            .replace(/\{\{ID\}\}/g, identity.screenname || "Unknown")
+            .replace(/\{\{FULL_ID\}\}/g, identity.id)
             .replace(/\{\{DIRECT\}\}/g, directPeers)
             .replace(/\{\{MAP_CLASS\}\}/g, ENABLE_MAP ? '' : 'hidden')
             .replace(/\{\{THEMES_CLASS\}\}/g, ENABLE_THEMES ? '' : 'hidden')
@@ -41,6 +64,7 @@ const setupRoutes = (app, identity, peerManager, swarm, sseManager, diagnostics)
             totalUnique: peerManager.totalUniquePeers,
             direct: swarm.getSwarm().connections.size,
             id: identity.id,
+            screenname: identity.screenname,
             diagnostics: diagnostics.getStats(),
             chatEnabled: ENABLE_CHAT,
             peers: peerManager.getPeersWithIps()
@@ -58,6 +82,7 @@ const setupRoutes = (app, identity, peerManager, swarm, sseManager, diagnostics)
             totalUnique: peerManager.totalUniquePeers,
             direct: swarm.getSwarm().connections.size,
             id: identity.id,
+            screenname: identity.screenname,
             diagnostics: diagnostics.getStats(),
             chatEnabled: ENABLE_CHAT,
             peers: peerManager.getPeersWithIps()
