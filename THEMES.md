@@ -2,11 +2,11 @@
 
 ### Hypermind (Default)
 
-![Hypermind theme screenshot](assets/images/hypermind-theme.png)
+![Hypermind default theme screenshot](assets/images/hypermind-theme.png)
 
 ### Hypermind Classic
 
-![Default theme screenshot](assets/images/default-theme.png)
+![Hypermind classic theme screenshot](assets/images/hypermind-classic-theme.png)
 
 ### Tokyo Night
 

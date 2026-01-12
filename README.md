@@ -52,7 +52,7 @@ A completely decentralized chat system built directly on top of the swarm topolo
 ### 3. Visualizations
 *   **Particle Map:** Visualizes approximate peer locations (if enabled).
 *   **Themes:** Built-in theme switcher (Hypermind, Hypermind Classic, Nord, Solarized, Tokyo Night, etc).<br>
-    <img src="assets/images/hypermind-theme.png" width="100" alt="Hypermind" /> <img src="assets/images/default-theme.png" width="100" alt="Hypermind Classic" /> <img src="assets/images/nord-dark-theme.png" width="100" alt="Nord" /> <img src="assets/images/solarized-light-theme.png" width="100" alt="Solarized" /> <img src="assets/images/tokyo-night-theme.png" width="100" alt="Tokyo Night" /> <img src="assets/images/volcano-theme.png" width="100" alt="Volcano" />
+    <img src="assets/images/hypermind-theme.png" width="100" alt="Hypermind" /> <img src="assets/images/hypermind-classic-theme.png" width="100" alt="Hypermind Classic" /> <img src="assets/images/nord-dark-theme.png" width="100" alt="Nord" /> <img src="assets/images/solarized-light-theme.png" width="100" alt="Solarized" /> <img src="assets/images/tokyo-night-theme.png" width="100" alt="Tokyo Night" /> <img src="assets/images/volcano-theme.png" width="100" alt="Volcano" />
 
 ---
 
