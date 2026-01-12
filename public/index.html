@@ -129,16 +129,39 @@
           <span class="stat-value" id="diag-invalid-sig">0</span>
         </div>
         <div class="stat-row">
-          <span class="stat-label">Bandwidth In</span>
-          <span class="stat-value" id="diag-bandwidth-in">0 KB</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Bandwidth Out</span>
-          <span class="stat-value" id="diag-bandwidth-out">0 KB</span>
-        </div>
-        <div class="stat-row">
           <span class="stat-label">LEAVE Messages</span>
           <span class="stat-value" id="diag-leave">0</span>
+        </div>
+
+        <div id="bandwidthOverlay" class="bandwidth-overlay">
+          <div class="bandwidth-title">Bandwidth</div>
+          <div class="bandwidth-graph-container">
+            <canvas id="bandwidthGraph"></canvas>
+          </div>
+          <div class="bandwidth-footer">
+            <div class="bandwidth-legend">
+              <div class="legend-item">
+                <span class="legend-color" style="background: #60a5fa"></span>
+                <span class="stat-value"
+                  >In: <span id="current-in">0 KB</span></span
+                >
+              </div>
+              <div class="legend-item">
+                <span class="legend-color" style="background: #f97316"></span>
+                <span class="stat-value"
+                  >Out: <span id="current-out">0 KB</span></span
+                >
+              </div>
+            </div>
+            <div class="time-pills">
+              <button class="time-pill" data-value="300">5m</button>
+              <button class="time-pill" data-value="1800">30m</button>
+              <button class="time-pill" data-value="all">All</button>
+              <button class="close-btn" onclick="toggleBandwidthGraph()">
+                −
+              </button>
+            </div>
+          </div>
         </div>
         <div class="update-time" id="last-update">last 10 seconds</div>
       </div>
