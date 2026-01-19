@@ -1,0 +1,43 @@
+:root {
+    --color-count: #cba6f7;
+    --color-particle: #b4befe;
+    --color-particle-link: rgba(180, 190, 254, 0.15);
+    --color-pulse: #f5c2e7;
+    --color-theme-toggle: #b4befe;
+    --color-theme-toggle-hover: #cba6f7;
+    --color-bg-main: #1e1e2e;
+    --color-bg-overlay: rgba(30, 30, 46, 0.8);
+
+    --color-text-default: #cdd6f4;
+    --color-text-main-label: #94e2d5;
+    --color-text-footer: #a6adc8;
+    --color-text-footer-hover: #94e2d5;
+    --color-text-debug: #7f849c;
+    --color-text-debug-link: #7f849c;
+    --color-text-debug-link-hover: #94e2d5;
+    --color-text-anchor-link: #a6adc8;
+
+    --color-modal-bg: #1e1e2e;
+    --color-modal-border: #11111b;
+    --color-modal-title: #cba6f7;
+    --color-modal-close-btn: #7f849c;
+    --color-modal-close-btn-hover: #f38ba8;
+    --color-modal-stat-div: #181825;
+    --color-modal-stat-label: #a6adc8;
+    --color-modal-stat-value: #94e2d5;
+    --color-modal-footer: #cba6f7;
+
+    --color-terminal-bg: rgba(24, 24, 37, 0.9);
+    --color-terminal-border: #11111b;
+    --color-terminal-shadow: rgba(0, 0, 0, 0.3);
+    --color-terminal-input-text: #cdd6f4;
+    --color-terminal-input-divider: #313244;
+    --color-terminal-output-message: #bac2de;
+    --color-terminal-tab-arrow: #b4befe;
+    --color-terminal-tab-arrow-hover: #cba6f7;
+    --color-terminal-tab-bg-hover: #313244;
+    --color-terminal-status-message: #6c7086;
+    --color-terminal-scrollbar: #b4befe;
+    --color-terminal-scrollbar-hover: #cba6f7;
+    --color-terminal-text-default: #b4befe;
+}

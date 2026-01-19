@@ -978,6 +978,8 @@ const themes = [
   "nord-dark.css",
   "solarized-light.css",
   "volcano.css",
+  "catppuccin-mocha.css",
+  "catppuccin-latte.css",
 ];
 
 let currentThemeIndex = 0;
